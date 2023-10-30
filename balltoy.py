@@ -68,7 +68,7 @@ class ball:
 		if self.clicked != 2: #only applied gravity and air resistance when not held by mouse
 
 			if self.pos.x+self.radius <Width-2 or self.pos.x-self.radius > 2: #does apply airRes when ball is in contact with wall
-				self.vel.x*self.airRes
+				self.vel.x*=self.airRes
 
 			if self.pos.y+self.radius < Height: #only applies when not touching the floor
 				self.vel.y+=self.grav
@@ -94,7 +94,7 @@ class ball:
 				if self.hasSet == False:
 					self.pos = mPosO
 					self.hasSet = True
-				self.vel = 0,0
+				self.vel = Vector2(0,0)
 
 				self.vel = mVel
 				self.clicked = 2
@@ -109,13 +109,13 @@ for i in range(totaltoys):
 	toys.append(ball(startpos))
 	startpos.x+=50
 
-tester = 0
+everyFour = 0
 
 while bye == False:
 
 	time.tick(240)
-	tester+=1
-	if tester == 4:
+	everyFour+=1
+	if everyFour == 4:
 		mPosN = Vector2(pygame.mouse.get_pos()[0],pygame.mouse.get_pos()[1])
 		#pygame.mouse.get_pressed()
 		mVel = mPosN - mPosO
@@ -140,7 +140,7 @@ while bye == False:
 
 		for i in range(totaltoys):
 			toys[i].update()
-		tester = 0
+		everyFour = 0
 	screen.fill((0,0,0))
 	for i in range(totaltoys):
 		toys[i].draw()
